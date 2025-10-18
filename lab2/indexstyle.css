@@ -66,3 +66,46 @@ ul {
 li {
     margin-bottom: 10px;
 }
+
+.damage-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.damage-table th,
+.damage-table td {
+    border: 1px solid #000000;
+    padding: 12px;
+    text-align: center;
+}
+
+.damage-table th {
+    background-color: #fc0000;
+    color: white;
+    font-weight: bold;
+}
+
+/* Выравнивание чисел по правому краю */
+.number {
+    text-align: right;
+    padding-right: 15px;
+}
+
+/* Чередование цветов строк для лучшей читаемости */
+.damage-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.damage-table tr:nth-child(odd) {
+    background-color: #9c8c8c;
+}
+
+/* Эффект при наведении на строку */
+.damage-table tr:hover {
+    background-color: #66fc72;
+    transition: background-color 0.3s ease;
+}
+
