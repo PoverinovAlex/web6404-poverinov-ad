@@ -70,9 +70,15 @@ function fibonacci(n) {
  * console.log(sumFn(3)) - 18
  */
 function getOperationFn(initialValue, operatorFn) {
-    return function(){
-
-    }
+    let storedValue = initialValue;
+    
+    return function(newValue) {
+        if (!operatorFn) {
+            return storedValue;
+        }
+        storedValue = operatorFn(storedValue, newValue);
+        return storedValue;
+    };
 }
 
 /**
@@ -91,7 +97,15 @@ function getOperationFn(initialValue, operatorFn) {
  * console.log(generator()); // 7
  * console.log(generator()); // 9
  */
-function sequence(start, step) {}
+function sequence(start = 0, step = 1) {
+  let current = start;
+
+  return function generator() {
+    const value = current;
+    current += step;
+    return value;
+  };
+}
 
 /**
  * Напишите функцию deepEqual, которая принимает два значения
@@ -107,7 +121,44 @@ function sequence(start, step) {}
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 33], text: 'text'}) // true
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 3], text: 'text2'}) // false
  */
-function deepEqual(firstObject, secondObject) {}
+function deepEqual(firstObject, secondObject) {
+    // Сравнение примитивов и проверка на строгое равенство
+    if (firstObject === secondObject) {
+        return true;
+    }
+    
+    // Проверка на null и сравнение типов
+    if (firstObject === null || secondObject === null || 
+        typeof firstObject !== 'object' || typeof secondObject !== 'object') {
+        return false;
+    }
+    
+    // Получаем ключи обоих объектов
+    const keys1 = Object.keys(firstObject);
+    const keys2 = Object.keys(secondObject);
+    
+    // Проверяем количество свойств
+    if (keys1.length !== keys2.length) {
+        return false;
+    }
+    
+    // Проверяем все свойства рекурсивно
+    for (let key of keys1) {
+        // Проверяем наличие свойства во втором объекте
+        if (!keys2.includes(key)) {
+            return false;
+        }
+        
+        // Рекурсивно сравниваем значения свойств
+        if (!deepEqual(firstObject[key], secondObject[key])) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+
 
 module.exports = {
     isInteger,
