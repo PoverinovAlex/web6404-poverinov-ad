@@ -122,6 +122,11 @@ function sequence(start = 0, step = 1) {
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 3], text: 'text2'}) // false
  */
 function deepEqual(firstObject, secondObject) {
+    // Особый случай для NaN
+    if (Number.isNaN(firstObject) && Number.isNaN(secondObject)) {
+        return true;
+    }
+    
     // Сравнение примитивов и проверка на строгое равенство
     if (firstObject === secondObject) {
         return true;
@@ -130,6 +135,24 @@ function deepEqual(firstObject, secondObject) {
     // Проверка на null и сравнение типов
     if (firstObject === null || secondObject === null || 
         typeof firstObject !== 'object' || typeof secondObject !== 'object') {
+        return false;
+    }
+    
+    // Сравнение массивов
+    if (Array.isArray(firstObject) && Array.isArray(secondObject)) {
+        if (firstObject.length !== secondObject.length) {
+            return false;
+        }
+        for (let i = 0; i < firstObject.length; i++) {
+            if (!deepEqual(firstObject[i], secondObject[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    // Если один массив, а другой - нет
+    if (Array.isArray(firstObject) || Array.isArray(secondObject)) {
         return false;
     }
     
