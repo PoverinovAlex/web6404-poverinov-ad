@@ -1,5 +1,3 @@
-// app.js
-
 // Класс для хранения данных пользователя
 class User {
     constructor(email, password, agree) {
@@ -38,9 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Вызываем метод вывода в консоль
             user.displayToConsole();
-            
-            // Здесь можно добавить отправку данных на сервер
-            // this.submit(); // Раскомментируйте, если нужно отправить форму на сервер
         });
     }
 });
