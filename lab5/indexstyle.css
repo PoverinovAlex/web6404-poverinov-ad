@@ -1,0 +1,257 @@
+:root {
+    /* Основные цвета */
+    --primary-color: #2c3e50;
+    --secondary-color: #f0f0f0;
+    --accent-color: #fc0000;
+    --text-color: white;
+    --background-color: white;
+    
+    /* Цвета таблицы */
+    --table-header-bg: #fc0000;
+    --table-header-text: white;
+    --table-even-row: #f8f9fa;
+    --table-odd-row: #9c8c8c;
+    --table-hover: #66fc72;
+    --table-border: #000000;
+    
+    /* Тени */
+    --shadow-color: rgba(0,0,0,0.1);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --shadow-card-hover: 0 25px 50px rgba(0, 0, 0, 0.15);
+    --border-card: 0 0 0 1px rgba(255, 255, 255, 0.8);
+    --border-card-hover: 0 0 0 1px rgba(255, 255, 255, 0.9);
+        /* Анимации */
+    --glow-color: rgba(255, 255, 255, 0.6);
+    --animation-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --gradient-color-1: #ff6b6b;
+    --gradient-color-2: #4ecdc4;
+    --gradient-color-3: #45b7d1;
+    --gradient-color-4: #96ceb4;
+    --gradient-color-5: #ffeaa7;
+}
+
+.units-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Стили для div внутри units-container - это будут наши карточки */
+.units-container > div {
+    background: linear-gradient(135deg, var(--background-color) 0%, var(--table-even-row) 100%);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 
+        var(--shadow-card),
+        var(--border-card);
+    transition: all 0.5s var(--animation-timing);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transform: translateY(0) scale(1);
+    border: 2px solid transparent;
+    animation: cardEntrance 0.8s var(--animation-timing) both;
+}
+
+/* Эффект сияющей границы для карточек */
+.units-container > div::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg,
+     var(--gradient-color-1), 
+         var(--gradient-color-1), 
+    var(--gradient-color-2), 
+    var(--gradient-color-3), 
+    var(--gradient-color-4), 
+    var(--gradient-color-5), 
+    var(--gradient-color-1));
+    background-size: 400% 400%;
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: gradientShift 3s ease infinite;
+}
+
+.units-container > div::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--glow-color),
+        transparent
+    );
+    transition: left 0.7s var(--animation-timing);
+}
+
+.units-container > div:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        var(--shadow-card-hover),
+        var(--border-card-hover);
+}
+
+.units-container > div:hover::before {
+    opacity: 1;
+}
+
+.units-container > div:hover::after {
+    left: 100%;
+}
+
+.units-container > div:active {
+    transform: translateY(-5px) scale(1.01);
+    transition: all 0.2s ease;
+}
+
+/* Анимация градиента */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.index-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+.index-container > nav {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Базовые стили для всего документа */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+/* Стили для шапки */
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 20px;
+    text-align: center;
+}
+
+/* Стили для навигации */
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 5px 10px;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+}
+
+/* Стили для основного контента */
+div {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Стили для изображения */
+img {
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+/* Стили для списка */
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.damage-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: var(--background-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.damage-table th,
+.damage-table td {
+    border: 1px solid var(--table-border);
+    padding: 12px;
+    text-align: center;
+}
+
+.damage-table th {
+    background-color: var(--table-header-bg);
+    color: var(--table-header-text);
+    font-weight: bold;
+}
+
+/* Выравнивание чисел по правому краю */
+.number {
+    text-align: right;
+    padding-right: 15px;
+}
+
+/* Чередование цветов строк для лучшей читаемости */
+.damage-table tr:nth-child(even) {
+    background-color: var(--table-even-row);
+}
+
+.damage-table tr:nth-child(odd) {
+    background-color: var(--table-odd-row);
+}
+
+/* Эффект при наведении на строку */
+.damage-table tr:hover {
+    background-color: var(--table-hover);
+    transition: background-color 0.3s ease;
+}

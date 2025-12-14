@@ -1,0 +1,59 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="regStyle.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Вход в систему</h2>
+            <form id="loginForm" action="/login" method="POST">
+                <!-- Поле ввода email -->
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Введите ваш email"
+                        required
+                    >
+                </div>
+
+                <!-- Поле ввода пароля -->
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Введите ваш пароль"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <!-- Checkbox согласия -->
+                <div class="form-group checkbox-group">
+                    <input 
+                        type="checkbox" 
+                        id="agree" 
+                        name="agree"
+                        required
+                    >
+                    <label for="agree" class="checkbox-label">
+                        Я согласен на обработку персональных данных
+                    </label>              
+                </div>
+              
+                <!-- Кнопка отправки -->
+                <button type="submit" class="submit-btn">Войти</button>
+            </form>
+        </div>
+    </div>
+        <!-- Подключение отдельного JS файла -->
+    <script src="reg.js"></script>
+</body>
+</html>
